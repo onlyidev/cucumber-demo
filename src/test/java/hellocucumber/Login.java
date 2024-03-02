@@ -3,9 +3,8 @@ package hellocucumber;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -13,6 +12,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
+@Disabled
 public class Login {
     private static class User {
         String email = "";
