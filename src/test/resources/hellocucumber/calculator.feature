@@ -29,6 +29,7 @@ Feature: Calculator functionality
       | 2    | 3    | 6      |
       | 4    | 5    | 20     |
       | 10   | 0    | 0      |
+      | -3   | 2    | -6     |
 
   Scenario: Division
     Given I enter 15

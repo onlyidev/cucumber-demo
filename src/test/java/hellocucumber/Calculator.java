@@ -13,9 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
+import java.util.Optional;
 
 public class Calculator {
     private static final WebDriver webDriver = new ChromeDriver();
+    private static final Map<Character, Character> transformer = Map.of(
+            '-', '−',
+            '*', '×',
+            '/', '÷'
+    );
     @BeforeAll
     public static void createWebEnv() {
         webDriver.manage().timeouts().implicitlyWait(Duration.of(10, ChronoUnit.SECONDS));
@@ -45,7 +52,8 @@ public class Calculator {
 
     @Then("the result should be {int} on the screen")
     public void theResultShouldBeOnTheScreen(int arg0) {
-        Assertions.assertEquals(Integer.toString(arg0), webDriver.findElement(By.id("cs_display")).getAttribute("value"));
+        Assertions.assertEquals(Integer.toString(arg0),
+                webDriver.findElement(By.id("cs_display")).getAttribute("value"));
     }
 
     @When("I press subtract")
@@ -67,7 +75,8 @@ public class Calculator {
     public void iEnter(int arg0) {
         String num = Integer.toString(arg0);
         for(char c : num.toCharArray()) {
-            webDriver.findElement(By.xpath(String.format("//button[text()='%c'][1]", c))).click();
+            webDriver.findElement(By.xpath(String.format("//button[text()='%c'][1]",
+                    Optional.ofNullable(transformer.get(c)).orElse(c)))).click();
         }
     }
 
